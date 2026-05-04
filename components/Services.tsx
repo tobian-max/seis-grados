@@ -203,7 +203,7 @@ export default function Services() {
     <section
       id="servicios"
       ref={sectionRef}
-      style={{ padding: '120px 48px', maxWidth: '1200px', margin: '0 auto' }}
+      className="section-outer section-inner"
     >
       <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '72px' }}>
         <p
@@ -245,10 +245,7 @@ export default function Services() {
         </p>
       </div>
 
-      <div
-        ref={gridRef}
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}
-      >
+      <div ref={gridRef} className="services-grid">
         {services.map((s) => (
           <ServiceCard key={s.id} service={s} />
         ))}

@@ -103,7 +103,7 @@ export default function Gallery() {
     <section
       id="galeria"
       ref={sectionRef}
-      style={{ padding: '120px 48px', maxWidth: '1200px', margin: '0 auto' }}
+      className="section-outer section-inner"
     >
       <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '72px' }}>
         <p
@@ -131,7 +131,7 @@ export default function Gallery() {
         </h2>
       </div>
 
-      <div ref={gridRef} style={{ columns: '3', gap: '12px', columnGap: '12px' }}>
+      <div ref={gridRef} className="gallery-masonry">
         {galleryItems.map((item, i) => (
           <GalleryItem key={i} item={item} />
         ))}

@@ -48,9 +48,9 @@ export default function About() {
     <section
       id="nosotros"
       ref={sectionRef}
+      className="section-outer"
       style={{
         background: 'var(--warm-white)',
-        padding: '120px 48px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -61,16 +61,8 @@ export default function About() {
       </div>
 
       <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '100px',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1,
-        }}
+        className="section-inner about-grid"
+        style={{ position: 'relative', zIndex: 1 }}
       >
         {/* Photo */}
         <div ref={photoRef} style={{ position: 'relative' }}>

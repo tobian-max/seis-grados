@@ -109,23 +109,15 @@ export default function Hero() {
       />
 
       <div
+        className="section-inner"
         style={{
           position: 'relative',
           zIndex: 2,
-          maxWidth: '1200px',
-          margin: '0 auto',
           padding: '120px 48px 80px',
           width: '100%',
         }}
       >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '80px',
-            alignItems: 'center',
-          }}
-        >
+        <div className="hero-grid">
           {/* Left: copy */}
           <div>
             <p
@@ -232,9 +224,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: logo clipped to hide "Business Solutions" */}
+          {/* Right: logo clipped to hide "Business Solutions" — hidden on mobile */}
           <div
             ref={logoRef}
+            className="hero-logo-col"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -271,22 +264,15 @@ export default function Hero() {
         {/* Stats bar */}
         <div
           ref={statsRef}
-          style={{
-            marginTop: '80px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1px',
-            background: 'rgba(255,255,255,0.1)',
-            borderRadius: '4px',
-            overflow: 'hidden',
-          }}
+          className="hero-stats"
+          style={{ background: 'rgba(255,255,255,0.1)' }}
         >
           {stats.map((s, i) => (
             <div
               key={i}
               style={{
                 background: 'rgba(255,255,255,0.06)',
-                padding: '32px 40px',
+                padding: '24px 16px',
                 textAlign: 'center',
               }}
             >

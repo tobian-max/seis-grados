@@ -33,3 +33,66 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--cream-light); }
 ::-webkit-scrollbar-thumb { background: var(--taupe); border-radius: 3px; }
+
+/* ── Responsive layout classes ───────────────────────────────── */
+
+/* Nav */
+.nav-root         { padding: 0 48px; }
+.nav-links        { display: flex; gap: 36px; align-items: center; }
+.nav-hamburger    { display: none; background: none; border: none; cursor: pointer; padding: 8px; line-height: 0; }
+.nav-mobile-menu  { display: none; }
+
+/* Section wrappers */
+.section-outer    { padding: 120px 48px; }
+.section-inner    { max-width: 1200px; margin: 0 auto; }
+
+/* Two-column grids */
+.hero-grid        { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-grid       { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.contact-grid     { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+.form-name-row    { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Three-column grids */
+.services-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.hero-stats       { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 80px; border-radius: 4px; overflow: hidden; }
+.footer-grid      { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+
+/* Gallery */
+.gallery-masonry  { columns: 3; gap: 12px; column-gap: 12px; }
+
+/* ── Mobile breakpoint ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-root         { padding: 0 20px; }
+  .nav-links        { display: none; }
+  .nav-hamburger    { display: block; }
+
+  .nav-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--charcoal);
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 48px 24px;
+  }
+
+  .section-outer    { padding: 72px 20px; }
+
+  .hero-grid        { grid-template-columns: 1fr; gap: 40px; }
+  .hero-logo-col    { display: none; }
+  .hero-stats       { grid-template-columns: repeat(3, 1fr); margin-top: 48px; }
+
+  .services-grid    { grid-template-columns: 1fr; }
+
+  .about-grid       { grid-template-columns: 1fr; gap: 40px; }
+
+  .contact-grid     { grid-template-columns: 1fr; gap: 48px; }
+  .form-name-row    { grid-template-columns: 1fr; }
+
+  .footer-grid      { grid-template-columns: 1fr; gap: 40px; }
+
+  .gallery-masonry  { columns: 2; }
+}

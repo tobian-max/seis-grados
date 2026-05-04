@@ -102,9 +102,9 @@ export default function Contact() {
     <section
       id="contacto"
       ref={sectionRef}
+      className="section-outer"
       style={{
         background: 'var(--warm-white)',
-        padding: '120px 48px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -114,15 +114,8 @@ export default function Contact() {
       </div>
 
       <div
-        style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '100px',
-          position: 'relative',
-          zIndex: 1,
-        }}
+        className="section-inner contact-grid"
+        style={{ position: 'relative', zIndex: 1 }}
       >
         {/* Left */}
         <div
@@ -253,7 +246,7 @@ export default function Contact() {
                 border: '1px solid var(--cream)',
               }}
             >
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-name-row">
                 <div>
                   <label style={labelStyle}>Nombre</label>
                   <input

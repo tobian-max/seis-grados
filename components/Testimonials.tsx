@@ -105,9 +105,9 @@ export default function Testimonials() {
     <section
       id="testimonios"
       ref={sectionRef}
+      className="section-outer"
       style={{
         background: 'var(--charcoal)',
-        padding: '120px 48px',
         position: 'relative',
         overflow: 'hidden',
       }}

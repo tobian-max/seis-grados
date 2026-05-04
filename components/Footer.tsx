@@ -53,9 +53,11 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
+      className="section-outer"
       style={{
         background: 'var(--charcoal)',
-        padding: '60px 48px 32px',
+        paddingTop: '60px',
+        paddingBottom: '32px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -67,22 +69,8 @@ export default function Footer() {
         style={{ objectFit: 'cover', opacity: 0.12, pointerEvents: 'none' }}
       />
 
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 1fr 1fr',
-            gap: '60px',
-            marginBottom: '60px',
-          }}
-        >
+      <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="footer-grid">
           {/* Brand */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Image
