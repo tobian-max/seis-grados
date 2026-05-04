@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,35 +35,23 @@ export default function Testimonials() {
   const authorRef   = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Header scroll reveal
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(headerRef.current!.children, {
         scrollTrigger: { trigger: headerRef.current, start: 'top 80%', once: true },
-        opacity: 0,
-        y: 30,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: 'power2.out',
+        opacity: 0, y: 30, stagger: 0.12, duration: 0.7, ease: 'power2.out',
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  // Crossfade animation on testimonial change
   const crossfadeTo = (next: number) => {
-    const tl = gsap.timeline();
-    tl.to([quoteRef.current, authorRef.current], {
-      opacity: 0,
-      y: -16,
-      duration: 0.35,
-      ease: 'power2.in',
+    gsap.timeline().to([quoteRef.current, authorRef.current], {
+      opacity: 0, y: -16, duration: 0.35, ease: 'power2.in',
       onComplete: () => setActive(next),
     });
   };
 
-  // Fade-in when active changes
   useEffect(() => {
     if (!quoteRef.current || !authorRef.current) return;
     gsap.fromTo(
@@ -74,18 +61,11 @@ export default function Testimonials() {
     );
   }, [active]);
 
-  // Auto-rotate
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      setActive((a) => {
-        const next = (a + 1) % testimonials.length;
-        crossfadeTo(next);
-        return a;
-      });
+      setActive((a) => { const next = (a + 1) % testimonials.length; crossfadeTo(next); return a; });
     }, 5000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,11 +73,7 @@ export default function Testimonials() {
     if (intervalRef.current) clearInterval(intervalRef.current);
     crossfadeTo(i);
     intervalRef.current = setInterval(() => {
-      setActive((a) => {
-        const next = (a + 1) % testimonials.length;
-        crossfadeTo(next);
-        return a;
-      });
+      setActive((a) => { const next = (a + 1) % testimonials.length; crossfadeTo(next); return a; });
     }, 5000);
   };
 
@@ -106,47 +82,33 @@ export default function Testimonials() {
       id="testimonios"
       ref={sectionRef}
       className="section-outer"
-      style={{
-        background: 'var(--charcoal)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      style={{ background: 'var(--light)', position: 'relative' }}
     >
-      <Image
-        src="/uploads/watermark.png"
-        alt=""
-        fill
-        style={{ objectFit: 'cover', opacity: 0.12, pointerEvents: 'none' }}
-      />
-
-      <div
-        style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 2,
-        }}
-      >
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <p
-            style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--green)',
-              marginBottom: '16px',
-            }}
-          >
-            Lo que dicen
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px', marginBottom: '20px' }}>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)' }} />
+            <span
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontWeight: 300,
+                fontSize: '11px',
+                letterSpacing: '5px',
+                textTransform: 'uppercase',
+                color: 'var(--accent)',
+              }}
+            >
+              Lo que dicen
+            </span>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)' }} />
+          </div>
           <h2
             style={{
-              fontFamily: 'var(--font-playfair, Playfair Display), serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
-              fontWeight: 400,
-              color: '#faf9f7',
+              fontWeight: 600,
+              letterSpacing: '-0.5px',
+              color: 'var(--ink-dark)',
             }}
           >
             Clientes que lo vivieron
@@ -167,12 +129,12 @@ export default function Testimonials() {
           <p
             ref={quoteRef}
             style={{
-              fontFamily: 'var(--font-playfair, Playfair Display), serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: 'clamp(18px, 2.5vw, 24px)',
               fontStyle: 'italic',
               fontWeight: 400,
               lineHeight: 1.65,
-              color: 'rgba(250,249,247,0.85)',
+              color: 'var(--ink-dark)',
               maxWidth: '700px',
               marginBottom: '36px',
             }}
@@ -180,23 +142,15 @@ export default function Testimonials() {
             &ldquo;{testimonials[active].quote}&rdquo;
           </p>
 
-          <div
-            ref={authorRef}
-            style={{ display: 'flex', alignItems: 'center', gap: '16px' }}
-          >
+          <div ref={authorRef} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div
               style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                background: 'var(--taupe)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                fontSize: '14px',
-                fontWeight: 600,
-                color: '#faf9f7',
+                width: '44px', height: '44px', borderRadius: '50%',
+                background: 'var(--light-sub)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontSize: '14px', fontWeight: 600,
+                color: 'var(--ink-mid)',
                 flexShrink: 0,
               }}
             >
@@ -205,20 +159,16 @@ export default function Testimonials() {
             <div style={{ textAlign: 'left' }}>
               <div
                 style={{
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  color: '#faf9f7',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '14px', fontWeight: 500, color: 'var(--ink-dark)',
                 }}
               >
                 {testimonials[active].name}
               </div>
               <div
                 style={{
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '13px',
-                  fontWeight: 300,
-                  color: 'rgba(250,249,247,0.5)',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '13px', fontWeight: 300, color: 'var(--ink-sub)',
                 }}
               >
                 {testimonials[active].role}
@@ -228,14 +178,7 @@ export default function Testimonials() {
         </div>
 
         {/* Dots */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '10px',
-            marginTop: '48px',
-          }}
-        >
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '48px' }}>
           {testimonials.map((_, i) => (
             <button
               key={i}
@@ -245,7 +188,7 @@ export default function Testimonials() {
                 width: i === active ? '28px' : '8px',
                 height: '8px',
                 borderRadius: '4px',
-                background: i === active ? 'var(--green)' : 'rgba(255,255,255,0.2)',
+                background: i === active ? 'var(--accent)' : 'var(--light-sub)',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',

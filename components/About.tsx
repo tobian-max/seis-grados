@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const pillars = [
+const chips = [
   { label: 'Mentoría',     desc: '1 a 1, personalizada y de alto impacto' },
   { label: 'Consultoría',  desc: 'Estratégica para equipos comerciales' },
   { label: 'Conferencias', desc: 'Keynotes y talleres internacionales' },
@@ -16,28 +16,23 @@ const pillars = [
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
-  const photoRef   = useRef<HTMLDivElement>(null);
   const copyRef    = useRef<HTMLDivElement>(null);
+  const photoRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const trigger = { trigger: sectionRef.current, start: 'top 65%', once: true };
 
-      gsap.from(photoRef.current, {
-        scrollTrigger: trigger,
-        opacity: 0,
-        x: -70,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
       gsap.from(copyRef.current!.children, {
         scrollTrigger: trigger,
-        opacity: 0,
-        x: 50,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power2.out',
+        opacity: 0, x: -50,
+        stagger: 0.1, duration: 0.7, ease: 'power2.out',
+      });
+
+      gsap.from(photoRef.current, {
+        scrollTrigger: trigger,
+        opacity: 0, x: 70,
+        duration: 1, ease: 'power3.out',
       });
     }, sectionRef);
 
@@ -49,73 +44,38 @@ export default function About() {
       id="nosotros"
       ref={sectionRef}
       className="section-outer"
-      style={{
-        background: 'var(--warm-white)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      style={{ background: 'var(--dark)', position: 'relative', overflow: 'hidden' }}
     >
-      {/* Watermark */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.06, pointerEvents: 'none' }}>
-        <Image src="/uploads/watermark.png" alt="" fill style={{ objectFit: 'cover' }} />
-      </div>
-
       <div
         className="section-inner about-grid"
         style={{ position: 'relative', zIndex: 1 }}
       >
-        {/* Photo */}
-        <div ref={photoRef} style={{ position: 'relative' }}>
-          <div
-            style={{
-              width: '100%',
-              paddingBottom: '120%',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <Image
-              src="/uploads/speaker.jpeg"
-              alt="Speaker en conferencia"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            />
-          </div>
-          {/* Accent box */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-24px',
-              right: '-24px',
-              width: '160px',
-              height: '160px',
-              background: 'var(--green)',
-              opacity: 0.12,
-            }}
-          />
-        </div>
-
-        {/* Copy */}
+        {/* Left: copy */}
         <div ref={copyRef} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          <p
-            style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--green)',
-            }}
-          >
-            Quiénes somos
-          </p>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)', flexShrink: 0 }} />
+            <span
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontWeight: 300,
+                fontSize: '11px',
+                letterSpacing: '5px',
+                textTransform: 'uppercase',
+                color: 'var(--accent)',
+              }}
+            >
+              Quiénes somos
+            </span>
+          </div>
 
           <h2
             style={{
-              fontFamily: 'var(--font-playfair, Playfair Display), serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: 'clamp(28px, 3vw, 44px)',
-              fontWeight: 400,
-              color: 'var(--charcoal)',
+              fontWeight: 600,
+              letterSpacing: '-0.5px',
+              color: 'var(--text-dark)',
               lineHeight: 1.15,
             }}
           >
@@ -124,11 +84,11 @@ export default function About() {
 
           <p
             style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: '16px',
               lineHeight: 1.8,
-              fontWeight: 300,
-              color: 'var(--brown-mid)',
+              fontWeight: 400,
+              color: 'var(--text-dark-sub)',
             }}
           >
             En 6 Grados Business Solutions acompañamos a ejecutivos, líderes y equipos comerciales a alcanzar su máxima versión. Lo hacemos con metodologías probadas, mentoría cercana y una convicción profunda: el cambio real ocurre desde adentro.
@@ -136,50 +96,56 @@ export default function About() {
 
           <p
             style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: '16px',
               lineHeight: 1.8,
-              fontWeight: 300,
-              color: 'var(--brown-mid)',
+              fontWeight: 400,
+              color: 'var(--text-dark-sub)',
             }}
           >
             Como speaker internacionales, llevamos estos principios a conferencias y entrenamientos corporativos en toda Latinoamérica y más allá, adaptando cada experiencia al lenguaje y la cultura de cada organización.
           </p>
 
+          {/* Capability chips */}
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '20px',
-              marginTop: '16px',
+              gap: '12px',
+              marginTop: '8px',
             }}
           >
-            {pillars.map((item) => (
+            {chips.map((chip) => (
               <div
-                key={item.label}
-                style={{ borderLeft: '2px solid var(--tan)', paddingLeft: '16px' }}
+                key={chip.label}
+                style={{
+                  background: 'var(--dark-mid)',
+                  border: '1px solid var(--dark-sub)',
+                  borderRadius: '8px',
+                  padding: '16px 20px',
+                }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                    fontSize: '13px',
+                    fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                    fontSize: '14px',
                     fontWeight: 600,
-                    color: 'var(--charcoal)',
+                    color: 'var(--text-dark)',
                     marginBottom: '4px',
                   }}
                 >
-                  {item.label}
+                  {chip.label}
                 </div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                    fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
                     fontSize: '13px',
                     fontWeight: 300,
-                    color: 'var(--taupe)',
+                    color: 'var(--text-dark-sub)',
                     lineHeight: 1.5,
                   }}
                 >
-                  {item.desc}
+                  {chip.desc}
                 </div>
               </div>
             ))}
@@ -192,23 +158,61 @@ export default function About() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'var(--charcoal)',
-              color: '#faf9f7',
+              background: 'var(--accent)',
+              color: '#fff',
               padding: '14px 28px',
+              borderRadius: '8px',
               width: 'fit-content',
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '13px',
-              fontWeight: 600,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+              fontSize: '15px',
+              fontWeight: 500,
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'background 150ms ease, transform 150ms ease',
             }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = 'var(--green-dark)')}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.background = 'var(--charcoal)')}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent-mid)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1.01)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1)';
+            }}
           >
             Conversemos →
           </a>
+        </div>
+
+        {/* Right: photo */}
+        <div ref={photoRef} style={{ position: 'relative' }}>
+          <div
+            style={{
+              width: '100%',
+              paddingBottom: '120%',
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: '4px',
+            }}
+          >
+            <Image
+              src="/uploads/speaker.jpeg"
+              alt="Speaker en conferencia"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            />
+          </div>
+          {/* Orange accent square */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-20px',
+              right: '-20px',
+              width: '120px',
+              height: '120px',
+              background: 'var(--accent)',
+              opacity: 0.15,
+              borderRadius: '4px',
+            }}
+          />
         </div>
       </div>
     </section>

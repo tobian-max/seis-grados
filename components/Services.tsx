@@ -14,7 +14,6 @@ const services = [
     desc: 'Sesiones individuales de alto impacto para ejecutivos que quieren operar en su máximo potencial. Trabajamos cuatro pilares fundamentales.',
     topics: ['Manejo del Tiempo', 'Presentaciones Poderosas', 'Reuniones Inteligentes', 'Comunicación Efectiva'],
     cta: 'Agenda una sesión',
-    accent: 'var(--tan)',
   },
   {
     id: 'consultoria',
@@ -23,7 +22,6 @@ const services = [
     desc: 'Diseñamos e implementamos estrategias para transformar equipos de ventas en máquinas de generación de valor y resultados sostenibles.',
     topics: ['Diagnóstico del equipo', 'Cultura de ventas', 'Metodologías de cierre', 'Liderazgo comercial'],
     cta: 'Hablemos de tu equipo',
-    accent: 'var(--taupe)',
   },
   {
     id: 'speaker',
@@ -32,7 +30,6 @@ const services = [
     desc: 'Conferencistas internacionales con experiencia en entrenamientos corporativos, keynotes y facilitación de procesos para grandes audiencias.',
     topics: ['Keynotes internacionales', 'Talleres corporativos', 'Facilitación de procesos', 'Contenido a la medida'],
     cta: 'Solicitar propuesta',
-    accent: 'var(--brown-mid)',
   },
 ];
 
@@ -45,28 +42,31 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? 'var(--charcoal)' : 'var(--warm-white)',
-        borderTop: `3px solid ${service.accent}`,
-        borderLeft: `1px solid ${hovered ? 'var(--charcoal)' : 'var(--cream)'}`,
-        borderRight: `1px solid ${hovered ? 'var(--charcoal)' : 'var(--cream)'}`,
-        borderBottom: `1px solid ${hovered ? 'var(--charcoal)' : 'var(--cream)'}`,
-        padding: '48px 40px',
-        transition: 'all 0.35s ease',
+        background: 'var(--light-mid)',
+        borderLeft: '1px solid var(--light-sub)',
+        borderRight: '1px solid var(--light-sub)',
+        borderBottom: '1px solid var(--light-sub)',
+        borderTop: '1px solid var(--light-sub)',
+        borderRadius: '12px',
+        padding: '40px',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+        boxShadow: hovered ? '0 12px 40px rgba(20,18,16,0.12)' : '0 1px 4px rgba(20,18,16,0.04)',
         cursor: 'default',
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px',
+        gap: '16px',
       }}
     >
+      {/* Tag */}
       <span
         style={{
-          fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+          fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
           fontSize: '11px',
-          fontWeight: 700,
-          letterSpacing: '0.18em',
+          fontWeight: 300,
+          letterSpacing: '5px',
           textTransform: 'uppercase',
-          color: hovered ? service.accent : 'var(--taupe)',
-          transition: 'color 0.35s',
+          color: 'var(--accent)',
         }}
       >
         {service.tag}
@@ -74,12 +74,11 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
 
       <h3
         style={{
-          fontFamily: 'var(--font-playfair, Playfair Display), serif',
-          fontSize: '26px',
-          fontWeight: 400,
-          color: hovered ? '#faf9f7' : 'var(--charcoal)',
-          lineHeight: 1.2,
-          transition: 'color 0.35s',
+          fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+          fontSize: '24px',
+          fontWeight: 600,
+          lineHeight: 1.3,
+          color: 'var(--ink-dark)',
         }}
       >
         {service.title}
@@ -87,12 +86,11 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
 
       <p
         style={{
-          fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+          fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
           fontSize: '15px',
-          lineHeight: 1.7,
-          fontWeight: 300,
-          color: hovered ? 'rgba(250,249,247,0.7)' : 'var(--taupe)',
-          transition: 'color 0.35s',
+          lineHeight: 1.6,
+          fontWeight: 400,
+          color: 'var(--ink-mid)',
         }}
       >
         {service.desc}
@@ -103,20 +101,16 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
           <li key={t} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span
               style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: service.accent,
-                flexShrink: 0,
+                width: '6px', height: '6px', borderRadius: '50%',
+                background: 'var(--accent)', flexShrink: 0,
               }}
             />
             <span
               style={{
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
                 fontSize: '14px',
                 fontWeight: 400,
-                color: hovered ? 'rgba(250,249,247,0.85)' : 'var(--brown-mid)',
-                transition: 'color 0.35s',
+                color: 'var(--ink-mid)',
               }}
             >
               {t}
@@ -132,18 +126,17 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
           paddingTop: '16px',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '8px',
-          fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-          fontSize: '13px',
-          fontWeight: 600,
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: hovered ? 'var(--green)' : 'var(--green-dark)',
+          gap: '6px',
+          fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+          fontSize: '14px',
+          fontWeight: 500,
+          color: 'var(--accent)',
           textDecoration: 'none',
-          borderBottom: `1px solid ${hovered ? 'var(--green)' : 'transparent'}`,
+          transition: 'gap 0.2s ease',
           width: 'fit-content',
-          transition: 'all 0.2s',
         }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '10px'; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '6px'; }}
       >
         {service.cta} →
       </a>
@@ -162,32 +155,20 @@ export default function Services() {
     const grid    = gridRef.current;
     if (!section || !header || !grid) return;
 
-    // Header reveal
     gsap.from(Array.from(header.children), {
       scrollTrigger: { trigger: header, start: 'top 82%', once: true },
-      opacity: 0,
-      y: 36,
-      stagger: 0.12,
-      duration: 0.7,
-      ease: 'power2.out',
+      opacity: 0, y: 36, stagger: 0.12, duration: 0.7, ease: 'power2.out',
     });
 
-    // Cards: set invisible, then reveal explicitly via onEnter
     const cards = Array.from(grid.querySelectorAll<HTMLElement>('.service-card'));
     gsap.set(cards, { opacity: 0, y: 60 });
 
     const st = ScrollTrigger.create({
       trigger: grid,
-      start: 'top 92%',   // fires as soon as grid peeks into view
+      start: 'top 92%',
       once: true,
       onEnter: () => {
-        gsap.to(cards, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: 'power3.out',
-        });
+        gsap.to(cards, { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power3.out' });
       },
     });
 
@@ -203,52 +184,59 @@ export default function Services() {
     <section
       id="servicios"
       ref={sectionRef}
-      className="section-outer section-inner"
+      className="section-outer"
+      style={{ background: 'var(--light)' }}
     >
-      <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '72px' }}>
-        <p
-          style={{
-            fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-            fontSize: '12px',
-            fontWeight: 700,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'var(--green)',
-            marginBottom: '16px',
-          }}
-        >
-          Lo que hacemos
-        </p>
-        <h2
-          style={{
-            fontFamily: 'var(--font-playfair, Playfair Display), serif',
-            fontSize: 'clamp(32px, 4vw, 52px)',
-            fontWeight: 400,
-            color: 'var(--charcoal)',
-            marginBottom: '20px',
-          }}
-        >
-          Nuestros servicios
-        </h2>
-        <p
-          style={{
-            fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-            fontSize: '17px',
-            fontWeight: 300,
-            color: 'var(--taupe)',
-            maxWidth: '560px',
-            margin: '0 auto',
-            lineHeight: 1.7,
-          }}
-        >
-          Tres caminos hacia el mismo destino: el máximo rendimiento de las personas y sus organizaciones.
-        </p>
-      </div>
+      <div className="section-inner">
+        <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px', marginBottom: '20px' }}>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)' }} />
+            <span
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontWeight: 300,
+                fontSize: '11px',
+                letterSpacing: '5px',
+                textTransform: 'uppercase',
+                color: 'var(--accent)',
+              }}
+            >
+              Lo que hacemos
+            </span>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)' }} />
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+              fontSize: 'clamp(28px, 3.5vw, 44px)',
+              fontWeight: 600,
+              letterSpacing: '-0.5px',
+              color: 'var(--ink-dark)',
+              marginBottom: '20px',
+            }}
+          >
+            Nuestros servicios
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+              fontSize: '17px',
+              fontWeight: 400,
+              color: 'var(--ink-mid)',
+              maxWidth: '560px',
+              margin: '0 auto',
+              lineHeight: 1.7,
+            }}
+          >
+            Tres caminos hacia el mismo destino: el máximo rendimiento de las personas y sus organizaciones.
+          </p>
+        </div>
 
-      <div ref={gridRef} className="services-grid">
-        {services.map((s) => (
-          <ServiceCard key={s.id} service={s} />
-        ))}
+        <div ref={gridRef} className="services-grid">
+          {services.map((s) => (
+            <ServiceCard key={s.id} service={s} />
+          ))}
+        </div>
       </div>
     </section>
   );

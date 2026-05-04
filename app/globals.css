@@ -1,18 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --cream-light: #e8e2d8;
-  --cream:       #d9d0c2;
-  --tan:         #c4aa8a;
-  --taupe-light: #a89d9a;
-  --taupe:       #8c7f7c;
-  --brown-mid:   #6b5f5c;
-  --brown-dark:  #4a3f3e;
-  --charcoal:    #3d3535;
-  --green:       #82a52a;
-  --green-dark:  #6b8a22;
-  --off-white:   #faf9f7;
-  --warm-white:  #f4f1ec;
+  /* Accent */
+  --accent:          #F97316;
+  --accent-mid:      #FB923C;
+  --accent-dim:      #C05A0A;
+  --accent-light:    #FED7AA;
+
+  /* Dark surfaces */
+  --dark:            #141210;
+  --dark-mid:        #1E1B17;
+  --dark-sub:        #2A261F;
+
+  /* Light surfaces */
+  --light:           #FAFAF8;
+  --light-mid:       #F0EDE8;
+  --light-sub:       #E5E1D8;
+
+  /* Ink — text on light */
+  --ink-dark:        #1C1917;
+  --ink-mid:         #44403C;
+  --ink-sub:         #78716C;
+  --ink-faint:       #A8A29E;
+
+  /* Text on dark */
+  --text-dark:       #F5F0EB;
+  --text-dark-sub:   #A89D90;
 }
 
 *, *::before, *::after {
@@ -24,15 +37,15 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--off-white);
-  color: var(--charcoal);
+  font-family: var(--font-space, 'Space Grotesk', sans-serif);
+  background: var(--dark);
+  color: var(--text-dark);
   overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--cream-light); }
-::-webkit-scrollbar-thumb { background: var(--taupe); border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--dark-mid); }
+::-webkit-scrollbar-thumb { background: var(--dark-sub); border-radius: 3px; }
 
 /* ── Responsive layout classes ───────────────────────────────── */
 
@@ -71,7 +84,7 @@ body {
     flex-direction: column;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--charcoal);
+    background: var(--dark);
     z-index: 99;
     align-items: center;
     justify-content: center;

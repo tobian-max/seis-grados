@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import Image from 'next/image';
+import Logo from './Logo';
 
 const navItems = [
   { label: 'Inicio',      href: '#inicio' },
@@ -32,21 +32,20 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const linkColor = scrolled ? 'var(--brown-dark)' : '#faf9f7';
-
   const desktopLinkStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-    fontSize: '14px', fontWeight: 500,
-    letterSpacing: '0.06em', textTransform: 'uppercase',
-    color: linkColor, textDecoration: 'none',
-    padding: '4px 0', borderBottom: '1.5px solid transparent',
-    transition: 'all 0.2s',
+    fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+    fontSize: '14px',
+    fontWeight: 400,
+    letterSpacing: '0.02em',
+    color: 'var(--text-dark-sub)',
+    textDecoration: 'none',
+    padding: '4px 0',
+    transition: 'color 150ms ease',
   };
 
   return (
@@ -57,21 +56,17 @@ export default function Nav() {
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          height: scrolled ? '64px' : '80px',
-          background: scrolled ? 'rgba(250,249,247,0.96)' : 'transparent',
+          height: '64px',
+          background: scrolled
+            ? 'rgba(20,18,16,0.92)'
+            : 'var(--dark)',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--cream)' : 'none',
-          transition: 'all 0.35s ease',
+          borderBottom: '1px solid var(--dark-sub)',
+          transition: 'background 0.35s ease',
         }}
       >
-        <a href="#inicio" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image
-            src="/uploads/logo.png"
-            alt="6 Grados Business Solutions"
-            width={160} height={44}
-            style={{ maxHeight: scrolled ? 36 : 44, width: 'auto', objectFit: 'contain' }}
-            priority
-          />
+        <a href="#inicio" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Logo mode="dark" variant="horizontal" markHeight={32} />
         </a>
 
         {/* Desktop links */}
@@ -81,14 +76,8 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               style={desktopLinkStyle}
-              onMouseEnter={(e) => {
-                (e.target as HTMLAnchorElement).style.borderBottomColor = 'var(--green)';
-                (e.target as HTMLAnchorElement).style.color = scrolled ? 'var(--green-dark)' : 'var(--green)';
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLAnchorElement).style.borderBottomColor = 'transparent';
-                (e.target as HTMLAnchorElement).style.color = linkColor;
-              }}
+              onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.color = 'var(--text-dark)'; }}
+              onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.color = 'var(--text-dark-sub)'; }}
             >
               {item.label}
             </a>
@@ -96,24 +85,35 @@ export default function Nav() {
           <a
             href="#contacto"
             style={{
-              background: 'var(--green)', color: '#fff', padding: '10px 22px',
-              borderRadius: '2px', fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em',
-              textTransform: 'uppercase', textDecoration: 'none', transition: 'background 0.2s',
+              background: 'var(--accent)',
+              color: '#fff',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+              fontSize: '14px',
+              fontWeight: 500,
+              textDecoration: 'none',
+              transition: 'background 150ms ease, transform 150ms ease',
             }}
-            onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.background = 'var(--green-dark)')}
-            onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.background = 'var(--green)')}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent-mid)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1.01)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)';
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1)';
+            }}
           >
             Conversemos
           </a>
         </div>
 
-        {/* Hamburger button — visible only on mobile via CSS */}
+        {/* Hamburger — visible only on mobile via CSS */}
         <button
           className="nav-hamburger"
           onClick={() => setMenuOpen(true)}
           aria-label="Abrir menú"
-          style={{ color: scrolled ? 'var(--charcoal)' : '#faf9f7' }}
+          style={{ color: 'var(--text-dark)' }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="3" y1="6"  x2="21" y2="6" />
@@ -126,14 +126,13 @@ export default function Nav() {
       {/* Mobile full-screen menu */}
       {menuOpen && (
         <div className="nav-mobile-menu">
-          {/* Close button */}
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Cerrar menú"
             style={{
               position: 'absolute', top: '24px', right: '20px',
               background: 'none', border: 'none', cursor: 'pointer',
-              color: 'rgba(250,249,247,0.6)',
+              color: 'var(--text-dark-sub)',
             }}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -142,13 +141,7 @@ export default function Nav() {
             </svg>
           </button>
 
-          {/* Logo in menu */}
-          <Image
-            src="/uploads/logo.png"
-            alt="6 Grados"
-            width={120} height={60}
-            style={{ maxHeight: 60, width: 'auto', objectFit: 'contain', marginBottom: '8px' }}
-          />
+          <Logo mode="dark" variant="stacked" markHeight={48} />
 
           {navItems.map((item) => (
             <a
@@ -156,10 +149,12 @@ export default function Nav() {
               href={item.href}
               onClick={() => setMenuOpen(false)}
               style={{
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                fontSize: '18px', fontWeight: 400,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                color: 'rgba(250,249,247,0.85)', textDecoration: 'none',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontSize: '18px',
+                fontWeight: 400,
+                letterSpacing: '0.04em',
+                color: 'var(--text-dark-sub)',
+                textDecoration: 'none',
               }}
             >
               {item.label}
@@ -171,11 +166,14 @@ export default function Nav() {
             onClick={() => setMenuOpen(false)}
             style={{
               marginTop: '8px',
-              background: 'var(--green)', color: '#fff',
-              padding: '14px 32px', borderRadius: '2px',
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '14px', fontWeight: 600, letterSpacing: '0.1em',
-              textTransform: 'uppercase', textDecoration: 'none',
+              background: 'var(--accent)',
+              color: '#fff',
+              padding: '14px 32px',
+              borderRadius: '8px',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+              fontSize: '15px',
+              fontWeight: 500,
+              textDecoration: 'none',
             }}
           >
             Conversemos

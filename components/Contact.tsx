@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,19 +30,10 @@ export default function Contact() {
     const ctx = gsap.context(() => {
       const trigger = { trigger: sectionRef.current, start: 'top 70%', once: true };
       gsap.from(leftRef.current!.children, {
-        scrollTrigger: trigger,
-        opacity: 0,
-        x: -40,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power2.out',
+        scrollTrigger: trigger, opacity: 0, x: -40, stagger: 0.1, duration: 0.7, ease: 'power2.out',
       });
       gsap.from(formRef.current, {
-        scrollTrigger: trigger,
-        opacity: 0,
-        x: 40,
-        duration: 0.8,
-        ease: 'power2.out',
+        scrollTrigger: trigger, opacity: 0, x: 40, duration: 0.8, ease: 'power2.out',
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -75,25 +65,25 @@ export default function Contact() {
   const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: '14px 16px',
-    fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+    fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
     fontSize: '15px',
-    fontWeight: 300,
-    color: 'var(--charcoal)',
-    background: '#fff',
-    border: '1px solid var(--cream)',
+    fontWeight: 400,
+    color: 'var(--ink-dark)',
+    background: 'var(--light-mid)',
+    border: '1px solid var(--light-sub)',
+    borderRadius: '8px',
     outline: 'none',
     transition: 'border-color 0.2s',
     appearance: 'none' as const,
-    borderRadius: 0,
   };
 
   const labelStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+    fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
     fontSize: '12px',
-    fontWeight: 600,
-    letterSpacing: '0.1em',
+    fontWeight: 500,
+    letterSpacing: '0.08em',
     textTransform: 'uppercase' as const,
-    color: 'var(--taupe)',
+    color: 'var(--ink-sub)',
     marginBottom: '8px',
     display: 'block',
   };
@@ -103,68 +93,94 @@ export default function Contact() {
       id="contacto"
       ref={sectionRef}
       className="section-outer"
-      style={{
-        background: 'var(--warm-white)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      style={{ background: 'var(--light)', position: 'relative', overflow: 'hidden' }}
     >
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.07 }}>
-        <Image src="/uploads/watermark.png" alt="" fill style={{ objectFit: 'cover' }} />
-      </div>
-
-      <div
-        className="section-inner contact-grid"
-        style={{ position: 'relative', zIndex: 1 }}
-      >
+      <div className="section-inner contact-grid" style={{ position: 'relative', zIndex: 1 }}>
         {/* Left */}
-        <div
-          ref={leftRef}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '32px',
-            justifyContent: 'center',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--green)',
-            }}
-          >
-            Hablemos
-          </p>
+        <div ref={leftRef} style={{ display: 'flex', flexDirection: 'column', gap: '32px', justifyContent: 'center' }}>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{ width: '36px', height: '3px', borderRadius: '2px', background: 'var(--accent)', flexShrink: 0 }} />
+            <span
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontWeight: 300,
+                fontSize: '11px',
+                letterSpacing: '5px',
+                textTransform: 'uppercase',
+                color: 'var(--accent)',
+              }}
+            >
+              Hablemos
+            </span>
+          </div>
+
           <h2
             style={{
-              fontFamily: 'var(--font-playfair, Playfair Display), serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: 'clamp(28px, 3vw, 44px)',
-              fontWeight: 400,
-              color: 'var(--charcoal)',
+              fontWeight: 600,
+              letterSpacing: '-0.5px',
+              color: 'var(--ink-dark)',
               lineHeight: 1.15,
             }}
           >
-            El primer paso
-            <br />
-            siempre es una
-            <br />
-            <em>conversación.</em>
+            El primer paso<br />siempre es una<br />
+            <em style={{ fontStyle: 'italic', color: 'var(--accent)' }}>conversación.</em>
           </h2>
+
           <p
             style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: '16px',
-              fontWeight: 300,
-              color: 'var(--brown-mid)',
+              fontWeight: 400,
+              color: 'var(--ink-mid)',
               lineHeight: 1.8,
             }}
           >
             Cuéntanos qué estás buscando y te responderemos en menos de 24 horas con una propuesta personalizada.
           </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <a
+              href="tel:+573107653257"
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontSize: '15px',
+                fontWeight: 400,
+                color: 'var(--ink-mid)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                transition: 'color 150ms ease',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-mid)'; }}
+            >
+              <span style={{ color: 'var(--accent)', fontSize: '18px' }}>☏</span>
+              +57 310 765 3257
+            </a>
+            <a
+              href="mailto:tobian@6-grados.com"
+              style={{
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                fontSize: '15px',
+                fontWeight: 400,
+                color: 'var(--ink-mid)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                transition: 'color 150ms ease',
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-mid)'; }}
+            >
+              <span style={{ color: 'var(--accent)', fontSize: '16px' }}>✉</span>
+              tobian@6-grados.com
+            </a>
+          </div>
         </div>
 
         {/* Form */}
@@ -172,8 +188,9 @@ export default function Contact() {
           {sent ? (
             <div
               style={{
-                background: '#fff',
-                border: '1px solid var(--cream)',
+                background: 'var(--light-mid)',
+                border: '1px solid var(--light-sub)',
+                borderRadius: '12px',
                 padding: '60px 40px',
                 textAlign: 'center',
                 display: 'flex',
@@ -186,34 +203,25 @@ export default function Contact() {
             >
               <div
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '50%',
-                  background: 'var(--green)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  width: '56px', height: '56px', borderRadius: '50%',
+                  background: 'var(--accent)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}
               >
                 <span style={{ color: '#fff', fontSize: '22px' }}>✓</span>
               </div>
               <h3
                 style={{
-                  fontFamily: 'var(--font-playfair, Playfair Display), serif',
-                  fontSize: '26px',
-                  fontWeight: 400,
-                  color: 'var(--charcoal)',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '26px', fontWeight: 600, color: 'var(--ink-dark)',
                 }}
               >
                 ¡Mensaje enviado!
               </h3>
               <p
                 style={{
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '15px',
-                  fontWeight: 300,
-                  color: 'var(--taupe)',
-                  lineHeight: 1.7,
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '15px', fontWeight: 400, color: 'var(--ink-mid)', lineHeight: 1.7,
                 }}
               >
                 Nos pondremos en contacto contigo en las próximas 24 horas.
@@ -223,12 +231,13 @@ export default function Contact() {
                 style={{
                   marginTop: '8px',
                   background: 'none',
-                  border: '1px solid var(--cream)',
+                  border: '1px solid var(--light-sub)',
+                  borderRadius: '8px',
                   padding: '10px 24px',
                   cursor: 'pointer',
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '13px',
-                  color: 'var(--taupe)',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '14px',
+                  color: 'var(--ink-sub)',
                 }}
               >
                 Enviar otro mensaje
@@ -241,35 +250,29 @@ export default function Contact() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px',
-                background: '#fff',
+                background: 'var(--light-mid)',
                 padding: '48px 40px',
-                border: '1px solid var(--cream)',
+                border: '1px solid var(--light-sub)',
+                borderRadius: '12px',
               }}
             >
               <div className="form-name-row">
                 <div>
                   <label style={labelStyle}>Nombre</label>
                   <input
-                    required
-                    name="nombre"
-                    value={form.nombre}
-                    onChange={handleChange}
-                    placeholder="Tu nombre"
-                    style={inputStyle}
-                    onFocus={(e) => (e.target.style.borderColor = 'var(--tan)')}
-                    onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
+                    required name="nombre" value={form.nombre} onChange={handleChange}
+                    placeholder="Tu nombre" style={inputStyle}
+                    onFocus={(e) => (e.target.style.borderColor = 'var(--accent)')}
+                    onBlur={(e) => (e.target.style.borderColor = 'var(--light-sub)')}
                   />
                 </div>
                 <div>
                   <label style={labelStyle}>Empresa</label>
                   <input
-                    name="empresa"
-                    value={form.empresa}
-                    onChange={handleChange}
-                    placeholder="Tu empresa"
-                    style={inputStyle}
-                    onFocus={(e) => (e.target.style.borderColor = 'var(--tan)')}
-                    onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
+                    name="empresa" value={form.empresa} onChange={handleChange}
+                    placeholder="Tu empresa" style={inputStyle}
+                    onFocus={(e) => (e.target.style.borderColor = 'var(--accent)')}
+                    onBlur={(e) => (e.target.style.borderColor = 'var(--light-sub)')}
                   />
                 </div>
               </div>
@@ -277,30 +280,20 @@ export default function Contact() {
               <div>
                 <label style={labelStyle}>Correo electrónico</label>
                 <input
-                  required
-                  type="email"
-                  name="correo"
-                  value={form.correo}
-                  onChange={handleChange}
-                  placeholder="tu@correo.com"
-                  style={inputStyle}
-                  onFocus={(e) => (e.target.style.borderColor = 'var(--tan)')}
-                  onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
+                  required type="email" name="correo" value={form.correo} onChange={handleChange}
+                  placeholder="tu@correo.com" style={inputStyle}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--light-sub)')}
                 />
               </div>
 
               <div>
                 <label style={labelStyle}>Servicio de interés</label>
                 <select
-                  name="servicio"
-                  value={form.servicio}
-                  onChange={handleChange}
-                  style={{
-                    ...inputStyle,
-                    color: form.servicio ? 'var(--charcoal)' : '#aaa',
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = 'var(--tan)')}
-                  onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
+                  name="servicio" value={form.servicio} onChange={handleChange}
+                  style={{ ...inputStyle, color: form.servicio ? 'var(--ink-dark)' : 'var(--ink-faint)' }}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--light-sub)')}
                 >
                   <option value="" disabled>Selecciona un servicio</option>
                   <option value="mentoria">Mentoría 1:1</option>
@@ -313,25 +306,18 @@ export default function Contact() {
               <div>
                 <label style={labelStyle}>Cuéntanos</label>
                 <textarea
-                  required
-                  name="mensaje"
-                  value={form.mensaje}
-                  onChange={handleChange}
+                  required name="mensaje" value={form.mensaje} onChange={handleChange}
                   placeholder="¿Qué estás buscando? ¿Cuál es tu reto actual?"
-                  rows={5}
-                  style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6 }}
-                  onFocus={(e) => (e.target.style.borderColor = 'var(--tan)')}
-                  onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
+                  rows={5} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6 }}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--light-sub)')}
                 />
               </div>
 
               {error && (
                 <p style={{
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '14px',
-                  color: '#c0392b',
-                  lineHeight: 1.5,
-                  margin: 0,
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '14px', color: '#c0392b', lineHeight: 1.5, margin: 0,
                 }}>
                   {error}
                 </p>
@@ -341,24 +327,29 @@ export default function Contact() {
                 type="submit"
                 disabled={sending}
                 style={{
-                  background: sending ? 'var(--taupe)' : 'var(--green)',
+                  background: sending ? 'var(--ink-faint)' : 'var(--accent)',
                   color: '#fff',
                   padding: '16px 32px',
                   border: 'none',
-                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  borderRadius: '8px',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '15px',
+                  fontWeight: 500,
                   cursor: sending ? 'not-allowed' : 'pointer',
-                  transition: 'background 0.2s',
+                  transition: 'background 150ms ease, transform 150ms ease',
                   width: '100%',
                 }}
                 onMouseEnter={(e) => {
-                  if (!sending) (e.target as HTMLButtonElement).style.background = 'var(--green-dark)';
+                  if (!sending) {
+                    (e.target as HTMLButtonElement).style.background = 'var(--accent-mid)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1.01)';
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  if (!sending) (e.target as HTMLButtonElement).style.background = 'var(--green)';
+                  if (!sending) {
+                    (e.target as HTMLButtonElement).style.background = 'var(--accent)';
+                    (e.target as HTMLButtonElement).style.transform = 'scale(1)';
+                  }
                 }}
               >
                 {sending ? 'Enviando…' : 'Enviar mensaje'}

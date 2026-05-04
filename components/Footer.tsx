@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
+import Logo from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,12 +24,12 @@ const serviceLinks = [
 ];
 
 const linkStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
   fontSize: '14px',
   fontWeight: 300,
-  color: 'rgba(250,249,247,0.6)',
+  color: 'var(--text-dark-sub)',
   textDecoration: 'none',
-  transition: 'color 0.2s',
+  transition: 'color 150ms ease',
   display: 'block',
 };
 
@@ -40,11 +40,7 @@ export default function Footer() {
     const ctx = gsap.context(() => {
       gsap.from(footerRef.current!.children, {
         scrollTrigger: { trigger: footerRef.current, start: 'top 90%', once: true },
-        opacity: 0,
-        y: 30,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power2.out',
+        opacity: 0, y: 30, stagger: 0.1, duration: 0.7, ease: 'power2.out',
       });
     }, footerRef);
     return () => ctx.revert();
@@ -55,39 +51,26 @@ export default function Footer() {
       ref={footerRef}
       className="section-outer"
       style={{
-        background: 'var(--charcoal)',
+        background: 'var(--dark)',
+        borderTop: '1px solid var(--dark-sub)',
         paddingTop: '60px',
         paddingBottom: '32px',
         position: 'relative',
-        overflow: 'hidden',
       }}
     >
-      <Image
-        src="/uploads/watermark.png"
-        alt=""
-        fill
-        style={{ objectFit: 'cover', opacity: 0.12, pointerEvents: 'none' }}
-      />
-
       <div className="section-inner" style={{ position: 'relative', zIndex: 1 }}>
         <div className="footer-grid">
           {/* Brand */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <Image
-              src="/uploads/logo.png"
-              alt="6 Grados Business Solutions"
-              width={120}
-              height={80}
-              style={{ maxHeight: 80, width: 'auto', objectFit: 'contain' }}
-            />
+            <Logo mode="dark" variant="stacked" markHeight={40} />
             <p
               style={{
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
                 fontSize: '14px',
                 fontWeight: 300,
-                color: 'rgba(250,249,247,0.55)',
+                color: 'var(--text-dark-sub)',
                 lineHeight: 1.75,
-                maxWidth: '320px',
+                maxWidth: '280px',
               }}
             >
               Mentoría ejecutiva, consultoría comercial y conferencias internacionales para alcanzar el máximo potencial.
@@ -96,18 +79,18 @@ export default function Footer() {
               <a
                 href="tel:+573107653257"
                 style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '8px' }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#faf9f7')}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'rgba(250,249,247,0.6)')}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)')}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark-sub)')}
               >
-                <span style={{ color: 'var(--tan)' }}>☏</span> +57 310 765 3257
+                <span style={{ color: 'var(--accent)' }}>☏</span> +57 310 765 3257
               </a>
               <a
                 href="mailto:tobian@6-grados.com"
                 style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '8px' }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#faf9f7')}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'rgba(250,249,247,0.6)')}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)')}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark-sub)')}
               >
-                <span style={{ color: 'var(--tan)' }}>✉</span> tobian@6-grados.com
+                <span style={{ color: 'var(--accent)' }}>✉</span> tobian@6-grados.com
               </a>
             </div>
           </div>
@@ -116,12 +99,12 @@ export default function Footer() {
           <div>
             <div
               style={{
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
                 fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.18em',
+                fontWeight: 300,
+                letterSpacing: '5px',
                 textTransform: 'uppercase',
-                color: 'var(--tan)',
+                color: 'var(--accent)',
                 marginBottom: '20px',
               }}
             >
@@ -133,8 +116,8 @@ export default function Footer() {
                   key={item.href}
                   href={item.href}
                   style={linkStyle}
-                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = '#faf9f7')}
-                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = 'rgba(250,249,247,0.6)')}
+                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = 'var(--accent)')}
+                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = 'var(--text-dark-sub)')}
                 >
                   {item.label}
                 </a>
@@ -146,12 +129,12 @@ export default function Footer() {
           <div>
             <div
               style={{
-                fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
                 fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.18em',
+                fontWeight: 300,
+                letterSpacing: '5px',
                 textTransform: 'uppercase',
-                color: 'var(--tan)',
+                color: 'var(--accent)',
                 marginBottom: '20px',
               }}
             >
@@ -163,8 +146,8 @@ export default function Footer() {
                   key={s}
                   href="#servicios"
                   style={linkStyle}
-                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = '#faf9f7')}
-                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = 'rgba(250,249,247,0.6)')}
+                  onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = 'var(--accent)')}
+                  onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = 'var(--text-dark-sub)')}
                 >
                   {s}
                 </a>
@@ -175,8 +158,9 @@ export default function Footer() {
 
         <div
           style={{
-            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderTop: '1px solid var(--dark-sub)',
             paddingTop: '28px',
+            marginTop: '8px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -184,20 +168,22 @@ export default function Footer() {
         >
           <span
             style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: '12px',
               fontWeight: 300,
-              color: 'rgba(250,249,247,0.35)',
+              color: 'var(--text-dark-sub)',
+              opacity: 0.5,
             }}
           >
             © 2026 6 Grados Business Solutions. Todos los derechos reservados.
           </span>
           <span
             style={{
-              fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
               fontSize: '12px',
               fontWeight: 300,
-              color: 'rgba(250,249,247,0.35)',
+              color: 'var(--text-dark-sub)',
+              opacity: 0.5,
             }}
           >
             Hecho con propósito.
