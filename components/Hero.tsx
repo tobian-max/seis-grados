@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Logo from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,7 @@ export default function Hero() {
   const h1Ref       = useRef<HTMLHeadingElement>(null);
   const descRef     = useRef<HTMLParagraphElement>(null);
   const ctasRef     = useRef<HTMLDivElement>(null);
+  const logoColRef  = useRef<HTMLDivElement>(null);
   const statsRef    = useRef<HTMLDivElement>(null);
   const statNumRefs = useRef<HTMLDivElement[]>([]);
 
@@ -38,7 +40,8 @@ export default function Hero() {
       tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.6 }, 0.5)
         .from(h1Ref.current, { opacity: 0, y: 40, duration: 0.8 }, 0.7)
         .from(descRef.current, { opacity: 0, y: 24, duration: 0.6 }, 1.0)
-        .from(ctasRef.current, { opacity: 0, y: 20, duration: 0.5 }, 1.2);
+        .from(ctasRef.current, { opacity: 0, y: 20, duration: 0.5 }, 1.2)
+        .from(logoColRef.current, { opacity: 0, scale: 0.88, duration: 1.2, ease: 'power2.out' }, 0.6);
 
       ScrollTrigger.create({
         trigger: statsRef.current,
@@ -82,120 +85,143 @@ export default function Hero() {
           width: '100%',
         }}
       >
-        {/* Single-column, left-aligned */}
-        <div style={{ maxWidth: '680px' }}>
+        {/* Two-column: copy left, logo right */}
+        <div className="hero-grid">
 
-          {/* Eyebrow: orange bar + label */}
-          <div ref={eyebrowRef} style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '28px' }}>
-            <div
-              style={{
-                width: '36px',
-                height: '3px',
-                borderRadius: '2px',
-                background: 'var(--accent)',
-                flexShrink: 0,
-              }}
-            />
-            <span
+          {/* Left: copy */}
+          <div>
+            {/* Eyebrow: orange bar + label */}
+            <div ref={eyebrowRef} style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '28px' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '3px',
+                  borderRadius: '2px',
+                  background: 'var(--accent)',
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontWeight: 300,
+                  fontSize: '11px',
+                  letterSpacing: '5px',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                }}
+              >
+                Business Solutions
+              </span>
+            </div>
+
+            <h1
+              ref={h1Ref}
               style={{
                 fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
-                fontWeight: 300,
-                fontSize: '11px',
-                letterSpacing: '5px',
-                textTransform: 'uppercase',
-                color: 'var(--accent)',
+                fontSize: 'clamp(36px, 4.5vw, 60px)',
+                fontWeight: 700,
+                lineHeight: 1.05,
+                letterSpacing: '-2px',
+                color: 'var(--text-dark)',
+                marginBottom: '28px',
               }}
             >
-              Business Solutions
-            </span>
-          </div>
+              Transformamos personas.{' '}
+              <em style={{ fontStyle: 'italic', color: 'var(--accent)', fontWeight: 700 }}>
+                Potenciamos equipos.
+              </em>
+            </h1>
 
-          <h1
-            ref={h1Ref}
-            style={{
-              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
-              fontSize: 'clamp(40px, 5vw, 64px)',
-              fontWeight: 700,
-              lineHeight: 1.05,
-              letterSpacing: '-2px',
-              color: 'var(--text-dark)',
-              marginBottom: '28px',
-            }}
-          >
-            Transformamos personas.{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--accent)', fontWeight: 700 }}>
-              Potenciamos equipos.
-            </em>
-          </h1>
-
-          <p
-            ref={descRef}
-            style={{
-              fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
-              fontSize: '17px',
-              fontWeight: 400,
-              lineHeight: 1.7,
-              color: 'var(--text-dark-sub)',
-              maxWidth: '480px',
-              marginBottom: '44px',
-            }}
-          >
-            Mentoría ejecutiva, consultoría comercial y conferencias internacionales para que tú y tu equipo operen al máximo nivel.
-          </p>
-
-          <div
-            ref={ctasRef}
-            style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}
-          >
-            <a
-              href="#servicios"
+            <p
+              ref={descRef}
               style={{
-                background: 'var(--accent)',
-                color: '#fff',
-                padding: '15px 32px',
-                borderRadius: '8px',
                 fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
-                fontSize: '15px',
-                fontWeight: 500,
-                textDecoration: 'none',
-                transition: 'background 150ms ease, transform 150ms ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent-mid)';
-                (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1.01)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)';
-                (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1)';
-              }}
-            >
-              Ver servicios
-            </a>
-            <a
-              href="#nosotros"
-              style={{
-                color: 'var(--text-dark-sub)',
-                fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
-                fontSize: '15px',
+                fontSize: '17px',
                 fontWeight: 400,
-                textDecoration: 'none',
-                border: '1px solid var(--dark-sub)',
-                padding: '14px 28px',
-                borderRadius: '8px',
-                transition: 'all 150ms ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark)';
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--text-dark-sub)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark-sub)';
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--dark-sub)';
+                lineHeight: 1.7,
+                color: 'var(--text-dark-sub)',
+                maxWidth: '480px',
+                marginBottom: '44px',
               }}
             >
-              Conoce nuestra historia
-            </a>
+              Mentoría ejecutiva, consultoría comercial y conferencias internacionales para que tú y tu equipo operen al máximo nivel.
+            </p>
+
+            <div
+              ref={ctasRef}
+              style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}
+            >
+              <a
+                href="#servicios"
+                style={{
+                  background: 'var(--accent)',
+                  color: '#fff',
+                  padding: '15px 32px',
+                  borderRadius: '8px',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  transition: 'background 150ms ease, transform 150ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent-mid)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1.01)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1)';
+                }}
+              >
+                Ver servicios
+              </a>
+              <a
+                href="#nosotros"
+                style={{
+                  color: 'var(--text-dark-sub)',
+                  fontFamily: "var(--font-space, 'Space Grotesk', sans-serif)",
+                  fontSize: '15px',
+                  fontWeight: 400,
+                  textDecoration: 'none',
+                  border: '1px solid var(--dark-sub)',
+                  padding: '14px 28px',
+                  borderRadius: '8px',
+                  transition: 'all 150ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark)';
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--text-dark-sub)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-dark-sub)';
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--dark-sub)';
+                }}
+              >
+                Conoce nuestra historia
+              </a>
+            </div>
           </div>
+
+          {/* Right: stacked logo — hidden on mobile via CSS */}
+          <div
+            ref={logoColRef}
+            className="hero-logo-col"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Logo
+              mode="dark"
+              variant="stacked"
+              markHeight={200}
+              wordmarkFontSize={64}
+              subtitleFontSize={13}
+            />
+          </div>
+
         </div>
 
         {/* Stats bar */}

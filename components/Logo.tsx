@@ -4,9 +4,17 @@ interface LogoProps {
   mode?: 'dark' | 'light';
   variant?: 'horizontal' | 'stacked' | 'mark';
   markHeight?: number;
+  wordmarkFontSize?: number;
+  subtitleFontSize?: number;
 }
 
-export default function Logo({ mode = 'dark', variant = 'horizontal', markHeight = 32 }: LogoProps) {
+export default function Logo({
+  mode = 'dark',
+  variant = 'horizontal',
+  markHeight = 32,
+  wordmarkFontSize: wordmarkFontSizeOverride,
+  subtitleFontSize: subtitleFontSizeOverride,
+}: LogoProps) {
   const fill = mode === 'dark' ? '#F5F0EB' : '#1C1917';
 
   const Mark = () => (
@@ -31,8 +39,8 @@ export default function Logo({ mode = 'dark', variant = 'horizontal', markHeight
     </svg>
   );
 
-  const wordmarkFontSize = Math.max(12, markHeight * 0.55);
-  const subtitleFontSize = Math.max(7, markHeight * 0.25);
+  const wordmarkFontSize = wordmarkFontSizeOverride ?? Math.max(12, markHeight * 0.55);
+  const subtitleFontSize = subtitleFontSizeOverride ?? Math.max(7, markHeight * 0.25);
 
   const Wordmark = () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
