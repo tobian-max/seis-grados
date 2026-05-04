@@ -21,6 +21,7 @@ export default function Contact() {
   });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef    = useRef<HTMLDivElement>(null);
@@ -52,10 +53,23 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    setTimeout(() => { setSending(false); setSent(true); }, 1400);
+    setError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Error al enviar');
+      setSent(true);
+    } catch {
+      setError('Hubo un problema al enviar el mensaje. Inténtalo de nuevo o escríbenos directamente a tobian@6-grados.com');
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -317,6 +331,18 @@ export default function Contact() {
                   onBlur={(e) => (e.target.style.borderColor = 'var(--cream)')}
                 />
               </div>
+
+              {error && (
+                <p style={{
+                  fontFamily: 'var(--font-dm-sans, DM Sans), sans-serif',
+                  fontSize: '14px',
+                  color: '#c0392b',
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}>
+                  {error}
+                </p>
+              )}
 
               <button
                 type="submit"
