@@ -1,11 +1,10 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const TO = process.env.CONTACT_EMAIL ?? 'tobian@6-grados.com';
-
 export async function POST(req: Request) {
   console.log('[contact] POST recibido');
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const TO = process.env.CONTACT_EMAIL ?? 'tobian@6-grados.com';
 
   const body = await req.json().catch(() => null);
   if (!body) {
