@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Logo from './Logo';
+import HeroAnimatedRight from './HeroAnimatedRight';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +29,6 @@ export default function Hero() {
   const h1Ref       = useRef<HTMLHeadingElement>(null);
   const descRef     = useRef<HTMLParagraphElement>(null);
   const ctasRef     = useRef<HTMLDivElement>(null);
-  const logoColRef  = useRef<HTMLDivElement>(null);
   const statsRef    = useRef<HTMLDivElement>(null);
   const statNumRefs = useRef<HTMLDivElement[]>([]);
 
@@ -40,8 +39,7 @@ export default function Hero() {
       tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.6 }, 0.5)
         .from(h1Ref.current, { opacity: 0, y: 40, duration: 0.8 }, 0.7)
         .from(descRef.current, { opacity: 0, y: 24, duration: 0.6 }, 1.0)
-        .from(ctasRef.current, { opacity: 0, y: 20, duration: 0.5 }, 1.2)
-        .from(logoColRef.current, { opacity: 0, scale: 0.88, duration: 1.2, ease: 'power2.out' }, 0.6);
+        .from(ctasRef.current, { opacity: 0, y: 20, duration: 0.5 }, 1.2);
 
       ScrollTrigger.create({
         trigger: statsRef.current,
@@ -203,23 +201,12 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: stacked logo — hidden on mobile via CSS */}
+          {/* Right: animated carousel — hidden on mobile via CSS */}
           <div
-            ref={logoColRef}
             className="hero-logo-col"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            style={{ position: 'relative', height: '520px' }}
           >
-            <Logo
-              mode="dark"
-              variant="stacked"
-              markHeight={200}
-              wordmarkFontSize={64}
-              subtitleFontSize={13}
-            />
+            <HeroAnimatedRight />
           </div>
 
         </div>

@@ -47,6 +47,16 @@ body {
 ::-webkit-scrollbar-track { background: var(--dark-mid); }
 ::-webkit-scrollbar-thumb { background: var(--dark-sub); border-radius: 3px; }
 
+/* ── Hero carousel keyframes ─────────────────────────────────── */
+@keyframes hero-marquee-even {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-40px); }
+}
+@keyframes hero-marquee-odd {
+  from { transform: translateX(-30px); }
+  to   { transform: translateX(10px); }
+}
+
 /* ── Responsive layout classes ───────────────────────────────── */
 
 /* Nav */
