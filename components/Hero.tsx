@@ -8,9 +8,9 @@ import HeroAnimatedRight from './HeroAnimatedRight';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { num: 500, prefix: '+', suffix: '', label: 'Ejecutivos mentoreados' },
-  { num: 15,  prefix: '+', suffix: '', label: 'Países alcanzados' },
-  { num: 200, prefix: '+', suffix: '', label: 'Empresas impactadas' },
+  { num: 500, prefix: '+', suffix: '', label: 'Ejecutivos impactados' },
+  { num: 10,  prefix: '+', suffix: '', label: 'Países alcanzados' },
+  { num: 100, prefix: '+', suffix: '', label: 'Empresas impactadas' },
 ];
 
 function animateCount(el: HTMLElement, target: number, prefix: string) {
