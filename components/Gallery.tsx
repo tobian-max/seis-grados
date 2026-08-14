@@ -13,6 +13,7 @@ const galleryItems = [
   { src: '/uploads/gallery-4.jpeg', label: 'Facilitación de procesos' },
   { src: '/uploads/gallery-5.jpeg', label: 'Keynote internacional' },
   { src: '/uploads/gallery-6.jpeg', label: 'Entrenamiento ejecutivo' },
+  { src: '/uploads/gallery-7.jpeg', label: 'Taller de efectividad' },
 ];
 
 function GalleryItem({ item }: { item: typeof galleryItems[0] }) {
